@@ -26,7 +26,6 @@ import { SocialsSidebar } from '@/components/SocialsSidebar';
 
 const Index = () => {
   const [showSidebar, setShowSidebar] = useState(false);
-  const [useSidebarLayout, setUseSidebarLayout] = useState(false);
 
   const statsCards = [
     {
@@ -130,14 +129,12 @@ const Index = () => {
             </div>
             
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 text-sm text-gray-300">
-                <span>Sidebar Layout</span>
-                <Switch 
-                  checked={useSidebarLayout} 
-                  onCheckedChange={setUseSidebarLayout}
-                  className="data-[state=checked]:bg-amber-500"
-                />
-              </div>
+              <button
+                onClick={() => setShowSidebar(true)}
+                className="text-sm text-amber-400 hover:text-amber-300 transition-colors cursor-pointer font-medium"
+              >
+                Connect Socials and Earn FAPS →
+              </button>
               <div className="text-right">
                 <div className="text-sm text-gray-400">💳 20369.52 USDC</div>
                 <Button className="bg-emerald-600 hover:bg-emerald-700 text-white ml-2">
@@ -225,8 +222,6 @@ const Index = () => {
           </CardContent>
         </Card>
 
-        {/* Social Connections - Conditional Rendering */}
-        {!useSidebarLayout && <SocialsInline />}
 
         {/* Chart Section */}
         <Card className="bg-gray-900/80 border-amber-500/30 backdrop-blur-sm mb-8 hover:scale-[1.02] transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/20">
@@ -255,21 +250,8 @@ const Index = () => {
         </Card>
       </div>
 
-      {/* Sidebar Layout Components */}
-      {useSidebarLayout && (
-        <>
-          {/* Floating Connect Button */}
-          <Button
-            onClick={() => setShowSidebar(true)}
-            className="fixed right-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 shadow-lg hover:shadow-xl hover:shadow-amber-500/20 transition-all duration-300 z-40 border border-amber-400/30 hover:scale-110"
-          >
-            <Link2 className="w-6 h-6 text-black" />
-          </Button>
-
-          {/* Sidebar */}
-          <SocialsSidebar isOpen={showSidebar} onClose={() => setShowSidebar(false)} />
-        </>
-      )}
+      {/* Sidebar */}
+      <SocialsSidebar isOpen={showSidebar} onClose={() => setShowSidebar(false)} />
     </div>
   );
 };

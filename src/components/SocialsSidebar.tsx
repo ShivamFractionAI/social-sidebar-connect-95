@@ -8,7 +8,7 @@ import {
   Send, 
   Phone, 
   Mail, 
-  Check,
+  CheckCheck,
   ExternalLink
 } from 'lucide-react';
 
@@ -129,7 +129,7 @@ export const SocialsSidebar = ({ isOpen, onClose }: SocialsSidebarProps) => {
           {/* Bonus Badge */}
           <div className="mb-6 p-4 bg-amber-500/25 rounded-xl border border-amber-500/40 shadow-sm shadow-amber-500/20">
             <div className="flex items-center space-x-2 mb-2">
-              <span className="text-sm font-semibold text-amber-300">🎁 Special Bonus</span>
+              <span className="text-sm font-semibold text-amber-300">Special Bonus</span>
             </div>
             <p className="text-sm text-gray-300">
               Connect all social accounts and earn an additional <span className="text-amber-400 font-semibold">+250 FAPS</span> bonus!
@@ -141,10 +141,12 @@ export const SocialsSidebar = ({ isOpen, onClose }: SocialsSidebarProps) => {
             {socialConnections.map((social, index) => (
               <div 
                 key={index}
-                className={`bg-gray-800/60 rounded-xl p-4 border transition-all duration-300 hover:shadow-md hover:shadow-amber-500/15 hover:scale-[1.02] ${
-                  highlightedBox === social.key 
-                    ? 'border-orange-500 bg-orange-500/10 shadow-lg shadow-orange-500/20' 
-                    : 'border-amber-500/30 hover:border-amber-500/50'
+                className={`rounded-xl p-4 border transition-all duration-300 hover:shadow-md hover:shadow-amber-500/15 hover:scale-[1.02] ${
+                  social.connected
+                    ? 'bg-orange-500/20 border-orange-500/50 shadow-lg shadow-orange-500/15' 
+                    : highlightedBox === social.key 
+                      ? 'border-orange-500 bg-orange-500/10 shadow-lg shadow-orange-500/20' 
+                      : 'bg-gray-800/60 border-amber-500/30 hover:border-amber-500/50'
                 }`}
               >
                 <div className="flex items-start space-x-4">
@@ -153,26 +155,22 @@ export const SocialsSidebar = ({ isOpen, onClose }: SocialsSidebarProps) => {
                   </div>
                   
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center justify-between mb-3">
                       <h3 className="font-semibold text-gray-200">{social.name}</h3>
                       {social.connected && (
-                        <Check className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                        <CheckCheck className="w-5 h-5 text-emerald-400 flex-shrink-0" />
                       )}
                     </div>
                     
                     <p className="text-sm text-gray-400 mb-3">{social.description}</p>
                     
-                    {social.connected && (
-                      <p className="text-xs text-amber-400 font-medium mb-2">{getConnectionDisplay(social.key)}</p>
-                    )}
-                    
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between mb-3">
                       <Badge variant="secondary" className="bg-amber-500/25 text-amber-400 border-amber-500/40 text-xs shadow-sm">
                         {social.reward}
                       </Badge>
                       
                       {social.connected ? (
-                        <div className="flex items-center space-x-1 text-emerald-400 text-sm">
+                        <div className="flex items-center space-x-1 text-emerald-400 text-sm font-medium">
                           <span>Connected</span>
                         </div>
                       ) : (
@@ -186,6 +184,10 @@ export const SocialsSidebar = ({ isOpen, onClose }: SocialsSidebarProps) => {
                         </Button>
                       )}
                     </div>
+
+                    {social.connected && (
+                      <p className="text-xs text-amber-400 font-medium">{getConnectionDisplay(social.key)}</p>
+                    )}
                   </div>
                 </div>
               </div>
