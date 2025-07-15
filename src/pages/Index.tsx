@@ -129,12 +129,6 @@ const Index = () => {
             </div>
             
             <div className="flex items-center space-x-4">
-              <button
-                onClick={() => setShowSidebar(true)}
-                className="text-sm text-amber-400 hover:text-amber-300 transition-colors cursor-pointer font-medium"
-              >
-                Connect Socials and Earn FAPS →
-              </button>
               <div className="text-right">
                 <div className="text-sm text-gray-400">💳 20369.52 USDC</div>
                 <Button className="bg-emerald-600 hover:bg-emerald-700 text-white ml-2">
@@ -151,6 +145,16 @@ const Index = () => {
       </header>
 
       <div className="max-w-[1424px] mx-auto px-6 py-8">
+        {/* Connect Socials Button */}
+        <div className="flex justify-end mb-6">
+          <button
+            onClick={() => setShowSidebar(true)}
+            className="text-sm text-amber-400 hover:text-amber-300 transition-colors cursor-pointer font-medium"
+          >
+            Connect Socials and Earn FAPS →
+          </button>
+        </div>
+
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {statsCards.map((stat, index) => (
