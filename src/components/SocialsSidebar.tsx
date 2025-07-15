@@ -157,26 +157,26 @@ export const SocialsSidebar = ({ isOpen, onClose }: SocialsSidebarProps) => {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="font-semibold text-gray-200">{social.name}</h3>
-                      <div className="flex flex-col items-end space-y-1">
-                        {social.connected ? (
-                          <CheckCheck className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-                        ) : (
-                          <Button 
-                            size="sm"
-                            onClick={() => handleConnect(social.key)}
-                            className="bg-amber-600 hover:bg-amber-700 text-black font-medium transition-all duration-300 shadow-sm shadow-amber-500/20 border border-amber-500/30"
-                          >
-                            Connect
-                            <ExternalLink className="w-3 h-3 ml-1" />
-                          </Button>
-                        )}
-                        <Badge variant="secondary" className="bg-amber-500/25 text-amber-400 border-amber-500/40 text-xs shadow-sm">
-                          {social.reward}
-                        </Badge>
-                      </div>
+                      {social.connected ? (
+                        <CheckCheck className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                      ) : (
+                        <Button 
+                          size="sm"
+                          onClick={() => handleConnect(social.key)}
+                          className="bg-amber-600 hover:bg-amber-700 text-black font-medium transition-all duration-300 shadow-sm shadow-amber-500/20 border border-amber-500/30"
+                        >
+                          Connect
+                          <ExternalLink className="w-3 h-3 ml-1" />
+                        </Button>
+                      )}
                     </div>
                     
-                    <p className="text-sm text-gray-400 mb-2">{social.description}</p>
+                    <div className="flex items-center justify-between mb-2">
+                      <p className="text-sm text-gray-400">{social.description}</p>
+                      <span className={`text-xs font-medium ${social.connected ? 'text-amber-400' : 'text-green-400'}`}>
+                        {social.reward}
+                      </span>
+                    </div>
 
                     {social.connected && (
                       <p className="text-xs text-amber-400 font-medium">{getConnectionDisplay(social.key)}</p>
